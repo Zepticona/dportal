@@ -1,28 +1,23 @@
 import { Container, Grid } from '@material-ui/core';
 import React, { useState } from 'react';
-import DateFnsUtils from '@date-io/date-fns';
-import {
-  MuiPickersUtilsProvider,
-  KeyboardDatePicker
-} from '@material-ui/pickers';
 import TimePicker from 'react-time-picker'
+import Calendar from 'react-calendar'
+import 'react-calendar/dist/Calendar.css';
+import SingleAppointment from '../SingleAppointment/SingleAppointment';
+
 
 // npm i @date-io/date-fns@1.x date-fns
 
 const AvailableAppointments = () => {
 
-    const [value, onChange] = useState('10:00');
-    
-    const [selectedDate, setSelectedDate] = React.useState(new Date('2014-08-18T21:11:54'));
+    const [currentTime, setCurrentTime] = useState('10:00');
+    const [currentDate, setCurrentDate] = useState(new Date());
 
-    const handleDateChange = (date) => {
-        setSelectedDate(date);
-        console.log(date)
-    };
+
 
     const handleTimePicker = () => {
-        console.log(typeof(value))
-        const time = value.split(':');
+        console.log(typeof(currentTime))
+        const time = currentTime.split(':');
         const clockHours = parseFloat(time[0]);
         const clockMins = parseFloat(time[1]);
         console.log(`Hours = ${clockHours} and mins = ${clockMins}`);
@@ -54,43 +49,24 @@ const AvailableAppointments = () => {
         <Container maxWidth="md">
             <Grid container>
                 <Grid item md="6">
-                    <MuiPickersUtilsProvider utils={DateFnsUtils}>
-                            <KeyboardDatePicker
-                            disableToolbar
-                            variant="inline"
-                            format="MM/dd/yyyy"
-                            margin="normal"
-                            id="date-picker-inline"
-                            label="Date picker inline"
-                            value={selectedDate}
-                            onChange={handleDateChange}
-                            KeyboardButtonProps={{
-                                'aria-label': 'change date',
-                            }}
-                            />
-                            <KeyboardDatePicker
-                            margin="normal"
-                            id="date-picker-dialog"
-                            label="Date picker dialog"
-                            format="MM/dd/yyyy"
-                            value={selectedDate}
-                            onChange={handleDateChange}
-                            KeyboardButtonProps={{
-                                'aria-label': 'change date',
-                            }}
-                            />
-                            
-                            <TimePicker
-                                onChange={onChange}
-                                onBlur={handleTimePicker}
-                                value={value}
-                            />
-                    </MuiPickersUtilsProvider>
+                    <Calendar
+                       onChange={setCurrentDate}
+                       value={currentDate} 
+                    />
+                    <TimePicker
+                        onChange={setCurrentTime}
+                        onBlur={handleTimePicker}
+                        value={currentTime}
+                    />
                 </Grid>
+
                 <Grid item md="6">
-                    picture
+                   
                 </Grid>
             </Grid>
+            <div>
+            <SingleAppointment name={'Teeth Cleaning'}></SingleAppointment>
+            </div>
         </Container>
     );
 };

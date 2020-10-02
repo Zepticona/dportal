@@ -13,8 +13,6 @@ const AvailableAppointments = () => {
     const [currentTime, setCurrentTime] = useState('10:00');
     const [currentDate, setCurrentDate] = useState(new Date());
 
-
-
     const handleTimePicker = () => {
         console.log(typeof(currentTime))
         const time = currentTime.split(':');
@@ -65,7 +63,7 @@ const AvailableAppointments = () => {
                 </Grid>
             </Grid>
             <div>
-            <SingleAppointment name={'Teeth Cleaning'}></SingleAppointment>
+            <SingleAppointment appointmentInfo={{name: 'Teeth Cleaning', currentDate, appointmentId: 1}}></SingleAppointment>
             </div>
         </Container>
     );

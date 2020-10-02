@@ -4,13 +4,13 @@ import { UserContext } from '../../App';
 
 const BookAppointment = () => {
     const [loggedInUser, setLoggedInUser] = useContext(UserContext);
-    const appointmentName = useParams()
-    console.log(appointmentName.appointmentNamem, loggedInUser);
+    const appointmentId = useParams()
+    console.log(appointmentId.appointmentName, loggedInUser);
     return (
         <div>
             <h2>Enter the following informations to book the appointment</h2>
-            <form action="/sendBooking" method="post">
-                <h4>{appointmentName.appointmentName}</h4>
+            <form action="http://localhost:8080/sendBooking" method="post">
+                <h4>{appointmentId.appointmentName}</h4>
                 <input type="time" style={{display: 'block'}} required />
                 <input type="text" name="name" placeholder="Your Name" style={{display: 'block'}} required />
                 <input type="phone" name="phone" placeholder="Phone Number" style={{display: 'block'}} required />
